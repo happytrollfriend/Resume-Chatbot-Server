@@ -22,9 +22,27 @@ app.post("/", express.json(), (req, res) => {
       richContent: [
         [
           {
-            type: "description",
-            title: "Web Server Payload Card",
-            text: ["Web Server test successful.", "successfully"],
+            type: "chips",
+            options: [
+              {
+                text: "Chip 1",
+                image: {
+                  src: {
+                    rawUrl: "https://example.com/images/logo.png",
+                  },
+                  link: "https://example.com",
+                },
+              },
+              {
+                text: "Chip 2",
+                image: {
+                  src: {
+                    rawUrl: "https://example.com/images/logo.png",
+                  },
+                },
+                link: "https://example.com",
+              },
+            ],
           },
         ],
       ],
