@@ -75,7 +75,7 @@ app.post("/", express.json(), (req, res) => {
 
     var email = agent.context.get("comfirmation").parameters["email.original"];
 
-    db.collection("test").insertOne({
+    db.collection("receivedusers").insertOne({
       name: name,
       email: email,
       time: Date.now(),
