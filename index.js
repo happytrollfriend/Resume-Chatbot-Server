@@ -72,18 +72,20 @@ app.post("/", express.json(), (req, res) => {
 
   function finalConfirmation(agent) {
     var name = agent.context.get("comfirmation").parameters["person.original"];
-
     var email = agent.context.get("comfirmation").parameters["email.original"];
+    var today = new Date();
+    var time =
+      today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
 
     db.collection("receivedusers").insertOne({
       name: name,
       email: email,
-      time: Date.now(),
+      appointmentDate: time,
     });
 
-    console.log(name);
-    console.log(email);
-
+    // console.log(name);
+    // console.log(email);
+    // console.log(time);
     agent.add(
       `Hello ${name}, your email: ${email}. We confirmed your meeting.`
     );
