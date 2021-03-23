@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "ngrok": "ngrok http 3000",
+    "testServer": "nodemon index.js"
   },
   "author": "",
   "license": "ISC",

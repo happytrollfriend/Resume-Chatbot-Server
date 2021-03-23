@@ -5,8 +5,11 @@ if (process.env.NODE_ENV !== "production") {
 const express = require("express");
 const app = express();
 const dialogflow = require("dialogflow-fulfillment");
-
+const ChatbotDocument = require("./models/chatbotDocument");
+const IntentRespone = require("./intents/intent");
+const RichContent = require("./intents/richContent");
 const mongoose = require("mongoose");
+const Introduction = require("./models/introduction");
 
 mongoose.connect(process.env.DATABASE_URL, { useNewUrlParser: true });
 const db = mongoose.connection;
@@ -17,16 +20,21 @@ app.get("/", (req, res) => {
   res.send("Screaming");
 });
 
-app.post("/", express.json(), (req, res) => {
+app.post("/", express.json(), async (req, res) => {
+  let query = ChatbotDocument.find();
+  let chatbotDoc = await query.exec();
+  let into = Introduction.find();
+  let intoDoc = await into.exec();
   const agent = new dialogflow.WebhookClient({
     request: req,
     response: res,
   });
+  // https://www.monster.com/career-advice/article/web-developer-resume-sample
 
+  // Introduction Project Skills Working Experience education Default Welcome Intent
   function test(agent) {
-    agent.add("Sending content from the server");
-
-    console.log("sent text content from server");
+    agent.add("hi");
+    console.log(intoDoc);
   }
 
   function payloadTest(agent) {
@@ -34,27 +42,15 @@ app.post("/", express.json(), (req, res) => {
       richContent: [
         [
           {
-            type: "chips",
-            options: [
-              {
-                text: "Chip 1",
-                image: {
-                  src: {
-                    rawUrl: "https://example.com/images/logo.png",
-                  },
-                  link: "https://example.com",
-                },
-              },
-              {
-                text: "Chip 2",
-                image: {
-                  src: {
-                    rawUrl: "https://example.com/images/logo.png",
-                  },
-                },
-                link: "https://example.com",
-              },
-            ],
+            type: "image",
+            rawUrl: `${chatbotDoc[0].coverImagePath}`,
+            accessibilityText: "Example logo",
+          },
+          {
+            type: "info",
+            title: "Dialog",
+            subtitle: "fw",
+            actionLink: `${chatbotDoc[0].coverImagePath}`,
           },
         ],
       ],
@@ -70,33 +66,14 @@ app.post("/", express.json(), (req, res) => {
     console.log("sent payload from server");
   }
 
-  function finalConfirmation(agent) {
-    var name = agent.context.get("comfirmation").parameters["person.original"];
-    var email = agent.context.get("comfirmation").parameters["email.original"];
-    var today = new Date();
-    var time =
-      today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
-
-    db.collection("receivedusers").insertOne({
-      name: name,
-      email: email,
-      appointmentDate: time,
-    });
-
-    // console.log(name);
-    // console.log(email);
-    // console.log(time);
-    agent.add(
-      `Hello ${name}, your email: ${email}. We confirmed your meeting.`
-    );
-  }
-
   var intent = new Map();
 
+  intent.set("Default Welcome Intent", IntentRespone.defaultIntent);
   intent.set("webhookTest", test);
   intent.set("testServerPayload", payloadTest);
-  intent.set("finalConfirmation", finalConfirmation);
-
+  intent.set("finalConfirmation", IntentRespone.finalConfirmation);
+  intent.set("introduction", IntentRespone.introduction);
+  intent.set("project", IntentRespone.project);
   agent.handleRequest(intent);
 });
 
