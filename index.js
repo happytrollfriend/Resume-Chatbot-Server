@@ -78,6 +78,9 @@ app.post("/", express.json(), async (req, res) => {
   intent.set("finalConfirmation", IntentRespone);
   intent.set("introduction", IntentRespone);
   intent.set("project", IntentRespone);
+  intent.set("education", IntentRespone);
+  intent.set("working experience", IntentRespone);
+  intent.set("Skills", IntentRespone);
   agent.handleRequest(intent);
 });
 

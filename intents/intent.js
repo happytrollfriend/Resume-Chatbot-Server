@@ -170,9 +170,27 @@ function finalConfirmation(agent) {
   agent.add(`Hello ${name}, your email: ${email}. We confirmed your meeting.`);
 }
 
-function intentRespone(agent) {
-  console.log(agent.intent);
-  agent.add("123");
+async function intentRespone(agent) {
+  var requestIntent = agent.intent;
+  var richContent = await RichContent(requestIntent);
+  var payloadRichContent = [];
+
+  richContent.forEach((item) => {
+    payloadRichContent.push(item.content);
+  });
+
+  var payload = {
+    richContent: [payloadRichContent],
+  };
+  console.log(requestIntent);
+  console.log(payloadRichContent);
+  // { richContent: [ [ [Object] ] ] }
+  agent.add(
+    new dialogflow.Payload("UNSPECIFIED", payload, {
+      sendAsMessage: true,
+      rawPayload: true,
+    })
+  );
 }
 
 // Introduction Project Skills Working Experience education Default Welcome Intent
@@ -188,3 +206,44 @@ module.exports = intentRespone;
 //   skills: skills,
 //   finalConfirmation: finalConfirmation,
 // };
+
+// education
+// {
+//   "richContent": [
+//     [
+//       {
+//         "actionLink": "http://www.ouhk.edu.hk/wcsprd/Satellite?pagename=OUHK/tcSingPage&lang=eng",
+//         "type": "info",
+//         "title": "Bachelor of Applied Science in Internet and Web Development",
+//         "subtitle": "SOMETOWN UNIVERSITY",
+//         "image": {
+//           "src": {
+//             "rawUrl": "https://cdn0.techbang.com/system/images/452264/original/3487db5a5e99a1edb03c3a02c05377bf.png?1533022751"
+//           }
+//         }
+//       }
+//     ]
+//   ]
+// }
+
+// Skills
+
+// {
+//   "richContent": [
+//     [
+//       {
+//         "text": [
+//           "HTML5",
+//           "CSS3",
+//           "JavaScript",
+//           "RWD",
+//           "JQuery",
+//           "Vuejs",
+//           "Bootstrap"
+//         ],
+//         "title": "Skills",
+//         "type": "description"
+//       }
+//     ]
+//   ]
+// }
