@@ -1,19 +1,16 @@
-const IntentModel = require("./intentModels");
-const Introduction = require("../models/introduction");
-// let testArray = [];
-// chatbotDoc.forEach((item, index) => {
-//   testArray.push(chatbotDoc[index]);
-// });
-// console.log(testArray);
+const ChatbotRespones = require("../models/chatbotRespones");
 
-var richContent = async () => {
-  let dbObj = Introduction.find();
+var richContent = async (intent) => {
+  let dbObj = ChatbotRespones.find();
   let doc = await dbObj.exec();
-  console.log(doc);
+
   let content = [];
-  doc.forEach((item, index) => {
-    content.push(doc.content[index]);
+  doc.forEach((item) => {
+    if (item.intent === intent) {
+      content.push(item);
+    }
   });
+  console.log(content.length);
   return content;
 };
 

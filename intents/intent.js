@@ -1,6 +1,8 @@
 const dialogflow = require("dialogflow-fulfillment");
 const mongoose = require("mongoose");
 const db = mongoose.connection;
+const ChatbotRespone = require("../models/chatbotRespones");
+const RichContent = require("./richContent");
 
 // https://www.monster.com/career-advice/article/web-developer-resume-sample
 
@@ -168,14 +170,21 @@ function finalConfirmation(agent) {
   agent.add(`Hello ${name}, your email: ${email}. We confirmed your meeting.`);
 }
 
+function intentRespone(agent) {
+  console.log(agent.intent);
+  agent.add("123");
+}
+
 // Introduction Project Skills Working Experience education Default Welcome Intent
 
-module.exports = {
-  defaultIntent: defaultWelcomeIntent,
-  introduction: introduction,
-  project: project,
-  workingExperience: workingExperience,
-  education: education,
-  skills: skills,
-  finalConfirmation: finalConfirmation,
-};
+module.exports = intentRespone;
+
+// module.exports = {
+//   defaultIntent: defaultWelcomeIntent,
+//   introduction: introduction,
+//   project: project,
+//   workingExperience: workingExperience,
+//   education: education,
+//   skills: skills,
+//   finalConfirmation: finalConfirmation,
+// };

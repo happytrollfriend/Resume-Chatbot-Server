@@ -21,6 +21,9 @@ const chatbotDocumentSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
+  content: {
+    type: Object,
+  },
 });
 
 chatbotDocumentSchema.virtual("coverImagePath").get(function () {
