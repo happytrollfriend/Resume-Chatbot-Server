@@ -72,15 +72,15 @@ app.post("/", express.json(), async (req, res) => {
 
   var intent = new Map();
 
-  intent.set("Default Welcome Intent", IntentRespone);
+  intent.set("Default Welcome Intent", IntentRespone.defaultIntent);
   intent.set("webhookTest", test);
   intent.set("testServerPayload", payloadTest);
-  intent.set("finalConfirmation", IntentRespone);
-  intent.set("introduction", IntentRespone);
-  intent.set("project", IntentRespone);
-  intent.set("education", IntentRespone);
-  intent.set("working experience", IntentRespone);
-  intent.set("Skills", IntentRespone);
+  intent.set("finalConfirmation", IntentRespone.finalConfirmation);
+  intent.set("introduction", IntentRespone.introduction);
+  intent.set("project", IntentRespone.project);
+  intent.set("education", IntentRespone.education);
+  intent.set("working experience", IntentRespone.workingExperience);
+  intent.set("Skills", IntentRespone.skills);
   agent.handleRequest(intent);
 });
 

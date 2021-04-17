@@ -195,17 +195,17 @@ async function intentRespone(agent) {
 
 // Introduction Project Skills Working Experience education Default Welcome Intent
 
-module.exports = intentRespone;
+// module.exports = intentRespone;
 
-// module.exports = {
-//   defaultIntent: defaultWelcomeIntent,
-//   introduction: introduction,
-//   project: project,
-//   workingExperience: workingExperience,
-//   education: education,
-//   skills: skills,
-//   finalConfirmation: finalConfirmation,
-// };
+module.exports = {
+  defaultIntent: defaultWelcomeIntent,
+  introduction: introduction,
+  project: project,
+  workingExperience: workingExperience,
+  education: education,
+  skills: skills,
+  finalConfirmation: finalConfirmation,
+};
 
 // education
 // {
