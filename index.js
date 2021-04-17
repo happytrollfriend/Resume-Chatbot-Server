@@ -68,6 +68,7 @@ app.post("/", express.json(), async (req, res) => {
     );
 
     console.log("sent payload from server");
+    console.log(chatbotDoc[0].coverImagePath);
   }
 
   var intent = new Map();

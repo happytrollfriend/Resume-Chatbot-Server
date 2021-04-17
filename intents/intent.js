@@ -60,6 +60,15 @@ function introduction(agent) {
             "Leverage technical, analytical and problem-solving skills to create dynamic, high-speed websites, apps and platforms fueling competitive advantage and revenue growth.",
           ],
         },
+        {
+          type: "chips",
+          options: [
+            { text: "Education" },
+            { text: "Skills" },
+            { text: "Working Experience" },
+            { text: "Projects" },
+          ],
+        },
       ],
     ],
   };
@@ -75,6 +84,35 @@ function introduction(agent) {
 // Education
 
 function education(agent) {
+  var payload = {
+    richContent: [
+      [
+        {
+          actionLink:
+            "http://www.ouhk.edu.hk/wcsprd/Satellite?pagename=OUHK/tcSingPage&lang=eng",
+          type: "info",
+          title: "Bachelor of Applied Science in Internet and Web Development",
+          subtitle: "SOMETOWN UNIVERSITY",
+          image: {
+            src: {
+              rawUrl:
+                "https://cdn0.techbang.com/system/images/452264/original/3487db5a5e99a1edb03c3a02c05377bf.png?1533022751",
+            },
+          },
+        },
+        {
+          type: "chips",
+          options: [
+            { text: "Introduction" },
+            { text: "Skills" },
+            { text: "Working Experience" },
+            { text: "Projects" },
+          ],
+        },
+      ],
+    ],
+  };
+
   agent.add(
     new dialogflow.Payload("UNSPECIFIED", payload, {
       sendAsMessage: true,
@@ -117,6 +155,15 @@ function project(agent) {
           subtitle:
             "Developed API platform for segmentation, personalized recommendations and omni-channel messaging that reduced cart-abandonment rate by 37%, leading to a $1.25M increase in online sales within 90 days of solution launch.",
         },
+        {
+          type: "chips",
+          options: [
+            { text: "Introduction" },
+            { text: "Education" },
+            { text: "Skills" },
+            { text: "Working Experience" },
+          ],
+        },
       ],
     ],
   };
@@ -132,6 +179,36 @@ function project(agent) {
 // Skills
 
 function skills(agent) {
+  var payload = {
+    richContent: [
+      [
+        {
+          text: [
+            "HTML5",
+            "CSS3",
+            "JavaScript",
+            "RWD",
+            "JQuery",
+            "Vuejs",
+            "Bootstrap",
+          ],
+          title: "Skills",
+          type: "description",
+        },
+        {
+          type: "chips",
+          options: [
+            { text: "Introduction" },
+            { text: "Education" },
+
+            { text: "Working Experience" },
+            { text: "Projects" },
+          ],
+        },
+      ],
+    ],
+  };
+
   agent.add(
     new dialogflow.Payload("UNSPECIFIED", payload, {
       sendAsMessage: true,
@@ -143,6 +220,36 @@ function skills(agent) {
 // Working Experience
 
 function workingExperience(agent) {
+  var payload = {
+    richContent: [
+      [
+        {
+          type: "description",
+          text: [
+            "Work collaboratively with clients and in-house agency teams to provide rapid, robust and client-acclaimed front- and back-end web development optimizing user experience, search engine ranking, sales, brand positioning and related metrics.",
+            "2046 to Present",
+          ],
+          title: "Web Developer ABC AGENCY, INC. - Sometown, NY",
+        },
+        {
+          title:
+            "WordPress Web Developer Intern, DEF AGENCY, INC. — Sometown, NY",
+          type: "description",
+          text: ["Work for workpress web development", "2045 to 2046"],
+        },
+        {
+          type: "chips",
+          options: [
+            { text: "Introduction" },
+            { text: "Education" },
+            { text: "Skills" },
+
+            { text: "Projects" },
+          ],
+        },
+      ],
+    ],
+  };
   agent.add(
     new dialogflow.Payload("UNSPECIFIED", payload, {
       sendAsMessage: true,
@@ -154,7 +261,7 @@ function workingExperience(agent) {
 // Final Comfirmation
 
 function finalConfirmation(agent) {
-  var name = agent.context.get("comfirmation").parameters["person.original"];
+  var name = agent.context.get("comfirmation").parameters["person"];
   var email = agent.context.get("comfirmation").parameters["email.original"];
   var today = new Date();
 
