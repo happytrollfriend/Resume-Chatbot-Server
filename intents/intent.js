@@ -261,9 +261,9 @@ function workingExperience(agent) {
 // Final Comfirmation
 
 function finalConfirmation(agent) {
-  var name = agent.context.get("comfirmation").parameters["person.original"];
-  var email = agent.context.get("comfirmation").parameters["email.original"];
-  var today = new Date();
+  const name = agent.context.get("comfirmation").parameters["person"];
+  let email = agent.context.get("comfirmation").parameters["email.original"];
+  let today = new Date();
 
   db.collection("receivedusers").insertOne({
     name: name,
