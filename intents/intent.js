@@ -261,7 +261,7 @@ function workingExperience(agent) {
 // Final Comfirmation
 
 function finalConfirmation(agent) {
-  var name = agent.context.get("comfirmation").parameters["person"];
+  var name = agent.context.get("comfirmation").parameters["person.original"];
   var email = agent.context.get("comfirmation").parameters["email.original"];
   var today = new Date();
 
